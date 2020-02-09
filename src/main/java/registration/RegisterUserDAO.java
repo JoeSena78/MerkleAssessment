@@ -13,7 +13,7 @@ public class RegisterUserDAO {
 		int result = 0;
 		
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mariadb://localhost:3306/test", "root", "root"); //change to correct database when uploaded to heroku
+			Connection con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/55TUicnuZy", "55TUicnuZy", "171evsUfUn"); //change to correct database when uploaded to heroku
 
             PreparedStatement ps = con.prepareStatement(query);
 
@@ -25,7 +25,7 @@ public class RegisterUserDAO {
             ps.setString(6, user.getState());
             ps.setString(7, user.getZip());
             ps.setString(8, user.getCountry());
-            ps.setString(9, user.getDate());
+            ps.setTimestamp(9, new java.sql.Timestamp(user.getDate().getTime()));
             
             result = ps.executeUpdate();
             ps.close();

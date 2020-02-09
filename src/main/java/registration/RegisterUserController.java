@@ -35,7 +35,7 @@ public class RegisterUserController extends HttpServlet{
 		user.setState(state);
 		user.setZip(zip);
 		user.setCountry(country);
-		user.setDate(dateFormat.format(date));
+		user.setDate(date); //dateFormat.format(date)
 		
 		try {
             int result = RegisterUserDAO.registerUser(user); //check if user registered, if registered redirect to confirmation page, else back to registration page

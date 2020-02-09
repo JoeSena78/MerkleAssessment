@@ -1,5 +1,7 @@
 package registration;
 
+import java.util.Date;
+
 public class User {
 	private String firstName;
 	private String lastName;
@@ -9,7 +11,7 @@ public class User {
 	private String state;
 	private String zip;
 	private String country;
-	private String date;
+	private Date date;
 	
 	public String getFirstName() {
 		return firstName;
@@ -59,10 +61,10 @@ public class User {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public String getDate() {
+	public Date getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 }
