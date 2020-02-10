@@ -148,7 +148,12 @@
 					<option value="United States">United States</option></select>
 			</div>
 			<br>
-			<input type="submit" value="Submit">
+			<div class="form-row text-center">
+				<div class="col-12">
+					<input class="btn btn-primary" type="submit" value="Submit">
+				</div>
+			</div>
+			
 		</form>
 	</div>
 </body>
