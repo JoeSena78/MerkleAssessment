@@ -13,14 +13,15 @@ import javax.servlet.http.HttpServletResponse;
 public class RegisterUserController extends HttpServlet{
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
-		String firstName = request.getParameter("firstName");
-		String lastName = request.getParameter("lastName");
+		String firstName = request.getParameter("firstname");
+		String lastName = request.getParameter("lastname");
 		String address1 = request.getParameter("address1");
 		String address2 = request.getParameter("address2");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
 		String zip = request.getParameter("zipcode");
 		String country = request.getParameter("country");
+		
 		
 		User user = new User();
 		
@@ -37,19 +38,30 @@ public class RegisterUserController extends HttpServlet{
 		user.setCountry(country);
 		user.setDate(date); //dateFormat.format(date)
 		
-		try {
-            int result = RegisterUserDAO.registerUser(user); //check if user registered, if registered redirect to confirmation page, else back to registration page
-            if(result == 0) {
-            	response.sendRedirect("registration.jsp");
-            }
-            else {
-            	response.sendRedirect("confirmation.jsp");
-            }
-            
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+		if(UserValidation.validate(user)) {
+			try {
+				//check if user registered, if registered redirect to confirmation page, else back to registration page
+				int result = RegisterUserDAO.registerUser(user);
+				
+	            if(result == 0) {
+	            	response.sendRedirect("registration.jsp");
+	            }
+	            else {
+	            	response.sendRedirect("confirmation.jsp");
+	            }
+	            
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+		}
+		else {
+			try {
+				response.sendRedirect("registration.jsp");
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

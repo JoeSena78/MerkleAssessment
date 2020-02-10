@@ -8,12 +8,16 @@ import java.sql.SQLException;
 public class RegisterUserDAO {
 	public static int registerUser(User user) {
 		String query = "INSERT INTO users " + 
-				"(firstName, lastName, address1, address2, city, state, zip, country, date) VALUES " + 
+				"(first_name, last_name, address_1, address_2, city, state, zip, country, date) VALUES " + 
 				"(?,?,?,?,?,?,?,?,?)";
 		int result = 0;
 		
+		
+		
 		try {
-			Connection con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/55TUicnuZy", "55TUicnuZy", "171evsUfUn"); //change to correct database when uploaded to heroku
+			Class.forName("com.mysql.jdbc.Driver");
+			
+			Connection con = DriverManager.getConnection("jdbc:mysql://remotemysql.com:3306/55TUicnuZy", "55TUicnuZy", "171evsUfUn");
 
             PreparedStatement ps = con.prepareStatement(query);
 
@@ -32,6 +36,9 @@ public class RegisterUserDAO {
             con.close();
 		}
 		catch(SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;

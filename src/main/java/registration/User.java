@@ -67,4 +67,13 @@ public class User {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	@Override
+	public String toString() {
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", address1=" + address1 + ", address2="
+				+ address2 + ", city=" + city + ", state=" + state + ", zip=" + zip + ", country=" + country + ", date="
+				+ date + "]";
+	}
+	
+	
 }
