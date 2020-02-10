@@ -1,7 +1,5 @@
 package registration;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/RegisterUserController")
 public class RegisterUserController extends HttpServlet{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) {
+		//Get user input and save as strings
 		String firstName = request.getParameter("firstname");
 		String lastName = request.getParameter("lastname");
 		String address1 = request.getParameter("address1");
@@ -22,12 +26,12 @@ public class RegisterUserController extends HttpServlet{
 		String zip = request.getParameter("zipcode");
 		String country = request.getParameter("country");
 		
-		
 		User user = new User();
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		//Current date and time user is being registered
 		Date date = new Date();
 		
+		//Add user information into user object
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
 		user.setAddress1(address1);
@@ -36,17 +40,20 @@ public class RegisterUserController extends HttpServlet{
 		user.setState(state);
 		user.setZip(zip);
 		user.setCountry(country);
-		user.setDate(date); //dateFormat.format(date)
+		user.setDate(date);
 		
+		//Validate user information again
 		if(UserValidation.validate(user)) {
 			try {
-				//check if user registered, if registered redirect to confirmation page, else back to registration page
+				//Variable used as response to whether registration was successful
 				int result = RegisterUserDAO.registerUser(user);
 				
 	            if(result == 0) {
+	            	//User was not registered, is sent back to registration page
 	            	response.sendRedirect("registration.jsp");
 	            }
 	            else {
+	            	//User was registered, is sent to confirmation page
 	            	response.sendRedirect("confirmation.jsp");
 	            }
 	            
@@ -56,6 +63,7 @@ public class RegisterUserController extends HttpServlet{
 		}
 		else {
 			try {
+				//If validation fails, user is sent back to registration page
 				response.sendRedirect("registration.jsp");
 			}
 			catch(Exception e) {

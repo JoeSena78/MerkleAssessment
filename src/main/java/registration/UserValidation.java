@@ -3,12 +3,14 @@ package registration;
 public class UserValidation {
 
 	public static boolean validate(User user) {
+		//Checking if entered zip code is a number
 		try {
 			int i = Integer.parseInt(user.getZip());
 		}
 		catch(NumberFormatException e) {
 			return false;
 		}
+		
 		if(user.getFirstName() == null || user.getFirstName().isEmpty()) {
 			return false;
 		}
