@@ -30,7 +30,7 @@
 			<th>State</th>
 			<th>Zip</th>
 			<th>Country</th>
-			<th>Date</th>
+			<th>Date(GMT)</th>
 		</tr>
 	</thead>
 	<% while(resultset.next()){ %>
